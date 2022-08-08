@@ -11,7 +11,7 @@ public:
   void search();
   void edit();
   void delete_inf();
-  private:    
+private:    
   std::string _name;
   std::string _surname;
   std::string _birth;
@@ -34,30 +34,32 @@ void Information::add()
     std::cin >> _number;
     std::cout << "Email:" << std::endl;
     std::cin >> _email;
-    std::ofstream myfile("project.txt",std::ios::app);
-    if(myfile.is_open())
+    std::ofstream myfile("project.txt", std::ios::app);
+    if (myfile.is_open())
     {
-    myfile << _id << ' ';
-    myfile << _name << ' ';
-    myfile << _surname << ' ';
-    myfile << _birth << ' ';
-    myfile << _number << ' ';
-    myfile << _email << ' ';
-    myfile << '\n';
-    myfile.close();
+        myfile << _id << ' ';
+        myfile << _name << ' ';
+        myfile << _surname << ' ';
+        myfile << _birth << ' ';
+        myfile << _number << ' ';
+        myfile << _email << ' ';
+        myfile << '\n';
+        myfile.close();
     }
-  else 
-  std::cout << "Unable to open file";
-  return;
+    else
+    {
+        std::cout << "Unable to open file";
+        return;
+    }
 }
 
 void Information::list()
 {
     std::string line;
     std::ifstream myfile("project.txt");
-    if(myfile.is_open())
+    if (myfile.is_open())
     {
-        while(getline(myfile,line))
+        while (getline(myfile,line))
         {
             std::cout << line << std::endl;
         }
@@ -73,18 +75,18 @@ void Information::search()
     std::cin >> _id;
     std::string str;
     std::string line;
-    if(myfile.is_open())
+    if (myfile.is_open())
     {
-        while(getline(myfile,line))
+        while (getline(myfile, line))
         {
             int i = 0;
             str = "";
-            while(line[i] != ' ')
+            while (line[i] != ' ')
             {
                 str += line[i];
                 ++i;
             }
-            if(_id == str)
+            if (_id == str)
             {
                 std::cout << line << std::endl;
             }
@@ -105,41 +107,41 @@ void Information::edit()
     std::cin >> _id;
     std::string str;
     std::string line;
-    if(myfile.is_open())
+    if (myfile.is_open())
     {
-        while(getline(myfile,line))
+        while (getline(myfile, line))
         {
             str += line[i];
             ++i;
         }
-        if(_id == str)
+        if (_id == str)
         {
             ++i;
-            while(line[i] != ' ')
+            while (line[i] != ' ')
             {
                 _name += line[i];
                 ++i;
             }
             ++i;
-            while(line[i] != ' ')
+            while (line[i] != ' ')
             {
                 _surname += line[i];
                 ++i;
             }
             ++i;
-            while(line[i] != ' ')
+            while (line[i] != ' ')
             {
                 _birth += line[i];
                 ++i;
             }
             ++i;
-            while(line[i] != ' ')
+            while (line[i] != ' ')
             {
                 _number += line[i];
                 ++i;
             }
             ++i;
-            while(line[i] != ' ')
+            while (line[i] != ' ')
             {
                 _email += line[i];
                 ++i;
@@ -149,21 +151,21 @@ void Information::edit()
     }
     std::ifstream filee("project.txt");
     std::ofstream tmp;
-    tmp.open("tmp.txt",std::ios::app);
+    tmp.open("tmp.txt", std::ios::app);
     std::string str2;
     std::string line1;
-    if(filee.is_open())
+    if (filee.is_open())
     {
-        while(getline(filee,line1))
+        while (getline(filee, line1))
         {
             int i = 0;
             str2 = "";
-            while(line[i] != ' ')
+            while (line[i] != ' ')
             {
                 str2 += line1[i];
                 ++i;
             }
-            if(_id != str2)
+            if (_id != str2)
             {
                 tmp << line1 << std::endl;
             }
@@ -171,7 +173,7 @@ void Information::edit()
         tmp.close();
         filee.close();
         remove("project.txt");
-        rename("tmp.txt","project.txt");
+        rename("tmp.txt", "project.txt");
     }
     std::string str1;
     int num;
@@ -201,17 +203,17 @@ void Information::edit()
         _email = str1;
         break;
     }
-    std::ofstream file("project.txt",std::ios::app);
-    if(file.is_open())
+    std::ofstream file("project.txt", std::ios::app);
+    if (file.is_open())
     {
-    file << _id << ' ';
-    file << _name << ' ';
-    file << _surname << ' ';
-    file << _birth << ' ';
-    file << _number << ' ';
-    file << _email << ' ';
-    file << '\n';
-    file.close();
+        file << _id << ' ';
+        file << _name << ' ';
+        file << _surname << ' ';
+        file << _birth << ' ';
+        file << _number << ' ';
+        file << _email << ' ';
+        file << '\n';
+        file.close();
     }
     return;
 }
@@ -225,18 +227,18 @@ void Information::delete_inf()
     std::cin >> _id;
     std::string str;
     std::string line;
-    if(myfile.is_open())
+    if (myfile.is_open())
     {
-        while(getline(myfile,line))
+        while (getline(myfile, line))
         {
             int i = 0;
             str = "";
-            while(line[i] != ' ')
+            while (line[i] != ' ')
             {
                 str += line[i];
                 ++i;
             }
-            if(_id != str)
+            if (_id != str)
             {
                 tmp << line << std::endl;
             }
@@ -244,7 +246,7 @@ void Information::delete_inf()
         tmp.close();
         myfile.close();
         remove("project.txt");
-        rename("tmp.txt","project.txt");
+        rename("tmp.txt", "project.txt");
     }
 }
 
@@ -253,16 +255,16 @@ int main ()
   Information obj;
   int option;
   do
-    {
-    std::cout << "[1] Add a new contact" << std::endl;
-    std::cout << "[2] List all contacts" << std::endl;
-    std::cout << "[3] Search for contact" << std::endl; 
-    std::cout << "[4] Edit a contact" << std::endl;
-    std::cout << "[5] Delete a contact" << std::endl;
-    std::cout << "[0] Exit" << std::endl;
-    std::cin >> option;
-    switch(option)
-    {
+  {
+      std::cout << "[1] Add a new contact" << std::endl;
+      std::cout << "[2] List all contacts" << std::endl;
+      std::cout << "[3] Search for contact" << std::endl; 
+      std::cout << "[4] Edit a contact" << std::endl;
+      std::cout << "[5] Delete a contact" << std::endl;
+      std::cout << "[0] Exit" << std::endl;
+      std::cin >> option;
+      switch(option)
+      {
         case 1:
         obj.add();
         break;
@@ -278,7 +280,6 @@ int main ()
         case 5:
         obj.delete_inf();
         break;
-    }
-    }
-    while(option != 0);
-}
+      }
+  } while (option != 0);
+}  
